@@ -1,0 +1,31 @@
+.EmployeeInfo{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+.EmployeeInfoText{
+    display: flex;
+    flex-direction: column;
+}
+img{
+    
+}
+.NameTitle{
+    border: 1px solid black;
+}
+.NameTitle ul{
+    list-style-type: none;
+    padding: 5px;
+    margin: 0px;
+}
+.Merits{
+    border: 1px solid black;
+}
+.merits ul{
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+}
+.EmployeeInfoText h4{
+    margin: 5px;
+    
+}
