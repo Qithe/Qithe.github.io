@@ -1,7 +1,15 @@
 body{
     font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+.PageWrapper{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
 .EmployeeInfo{
+    flex: 0 0 3000px;
     border: 1px solid black;
     display: flex;
     flex-direction: row;
@@ -36,4 +44,20 @@ body{
 .EmployeeInfoText h4{
     margin: 5px;
     
+}
+header{
+    background-color: blue;
+}
+nav{
+    background-color: yellow;
+}
+section{
+    background-color: green;
+}
+aside{
+    background-color: hotpink;
+    
+}
+footer{
+    background-color: red;
 }
