@@ -96,7 +96,7 @@ footer{
 /*Screen regulated apperance*/
 
 /*Mobile and tablet size*/
-@media (max-width:1279px){
+@media (max-width:980px){
     body{
         font-family: sans-serif;
         display: flex;
