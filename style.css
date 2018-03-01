@@ -1,17 +1,59 @@
+/*Non screen regulaed apperance*/
+body{
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    background-color: blue;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.PageWrapper{
+    flex: 1 1 auto;
+    display: flex;
+    width: 100%;
+}
+
+#CompNav{
+    background-color: yellow;
+    flex: 0 0 auto;
+    display: flex;
+    
+}
+
+#NavList{
+    list-style-type: none;
+}
+
+#ProductList{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+
 .EmployeeInfo{
+    flex: 0 0 3000px;
     border: 1px solid black;
     display: flex;
     flex-direction: row;
+    margin: 10px;
 }
 .EmployeeInfoText{
     display: flex;
     flex-direction: column;
+    position: relative;
 }
-img{
-    
+.EmployeePic{
+    border-right: 1px solid black;
+    width: 200px;
+    height: 200px;
 }
 .NameTitle{
-    border: 1px solid black;
+    
 }
 .NameTitle ul{
     list-style-type: none;
@@ -19,13 +61,214 @@ img{
     margin: 0px;
 }
 .Merits{
-    border: 1px solid black;
+    position: absolute;
+    bottom: 0px;
 }
 .merits ul{
     margin: 0px;
-    padding: 0px 0px 0px 20px;
+    padding: 0px 0px 0px 30px;
 }
 .EmployeeInfoText h4{
     margin: 5px;
     
 }
+
+
+section{
+    background-color: green;
+    flex: 1 1 auto;
+}
+article{
+    border: 1px solid black;
+    margin: 10px;
+}
+aside{
+    background-color: hotpink;
+    flex: 0 0 auto;
+    
+}
+footer{
+    background-color: red;
+    flex: 0 0 auto;
+}
+
+
+/*Screen regulated apperance*/
+
+/*Mobile and tablet size*/
+@media (max-width:1279px){
+    body{
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+    }
+    Header{
+        background-color: blue;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    Header h1{
+        font-size: 70px;
+        flex: 0 0 auto;
+        margin: 20px;
+    }
+    
+    header h2{
+        font-size: 40px;
+        margin: 15;
+    }
+    
+    .PageWrapper{
+        flex-direction: column;
+        flex: 1 1 auto;
+        display: flex;
+        width: 100%;
+    }
+    
+    #CompNav{
+        flex-direction: column;
+        background-color: yellow;
+        flex: 0 0 auto;
+        display: flex;
+    }
+    
+    #CompNav h3{
+        align-self: center;
+        font-size: 30;
+        margin: 10px 0px;
+    }
+    
+    #NavList{
+        margin: 0px;
+        font-size: 25;
+        display: table;
+        width: 100%;
+        list-style-type: none;
+    }
+    
+    #NavList > li{
+        margin: 0px;
+        text-align: center;
+        vertical-align: middle;
+        display: table-cell;
+    }
+    
+    #ProductList{
+        display: table;
+    }
+    
+    #ProductList > li{
+        text-align: center;
+        vertical-align: middle;
+        display: table-cell;
+    }
+    section{
+        background-color: green;
+        flex: 1 1 auto;
+    }
+    
+    article{
+        border: 1px solid black;
+        margin: 10px;
+    }
+    
+    article p{
+        
+    }
+    
+    aside{
+        background-color: hotpink;
+        flex: 0 0 auto;
+    }
+    
+    .EmployeeInfo{
+        flex: 0 0 3000px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        margin: 10px;
+    }
+    
+    .EmployeeInfo img{
+        height: 400;
+        width: 400;
+    }
+    
+    .EmployeeInfoText{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+    
+    .EmployeeInfoText h4{
+        margin: 5px;
+    }
+    
+    .NameTitle{
+        
+    }
+    
+    .NameTitle h4{
+        font-size: 48px;
+    }
+    
+    .TitleList{
+        list-style-type: none;
+        padding: 5px;
+        margin: 0px;
+    }
+    
+    .TitleList li{
+        font-size: 36px;
+    }
+    
+    .Merits{
+        position: absolute;
+        bottom: 0px;
+    }
+    
+    .Merits h4{
+        font-size: 48px;
+    }
+    
+    .MeritsList{
+        margin: 0px;
+        padding: 0px 0px 0px 30px;
+    }
+    
+    .MeritsList li{
+        font-size: 36px;
+    }
+    
+    footer{
+        background-color: red;
+        flex: 0 0 auto;
+    }
+    footer p{
+        font-size: 30px;
+    }
+    
+}
+
+/*Computer size*/
+@media (min-width:1280px){
+    .PageWrapper{
+        flex-direction: row;
+    }
+    
+    #CompNav{
+        flex-direction: column;
+    }
+    
+    #NavList{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #ProductList{
+        flex-direction: column;
+    }
+}
+
