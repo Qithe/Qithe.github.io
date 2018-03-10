@@ -14,7 +14,7 @@
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
-        color: #00ffffff;
+        color: #ffffff;
     }
     
     Header h1{
@@ -45,7 +45,7 @@
     #CompNav{
         flex-direction: column;
         background-color: #b71c1c;
-        color: #99ffffff;
+        color: #ffffff;
         flex: 0 0 auto;
         display: flex;
     }
@@ -59,7 +59,7 @@
     #NavList{
         margin: 0px;
         padding: 0px;
-        font-size: 25;
+        font-size: 25px;
         display: table;
         width: 100%;
         list-style-type: none;
@@ -110,7 +110,7 @@
     
     aside{
         background-color: #b71c1c;
-        color: #99ffffff;
+        color: #ffffff;
         flex: 1 1 auto;
     }
     
@@ -198,7 +198,7 @@
         flex: 1 1 auto;
         display: flex;
         flex-direction: row;
-        color: #73ffffff;
+        color: #ffffff;
         
     }
     
@@ -222,7 +222,7 @@
     
     #CompNav{
         background-color: #b71c1c;
-        color: #99ffffff;
+        color: #ffffff;
         flex: 0 0 auto;
         display: flex;
         flex-direction: column;
@@ -279,8 +279,8 @@
     
     aside{
         background-color: #b71c1c;
-        color: #99ffffff;
-                flex: 0 0 auto;
+        color: #ffffff;
+        flex: 0 0 auto;
 
     }
     
