@@ -19,7 +19,7 @@
     
     Header h1{
         text-transform: uppercase;
-        font-weight: 1000;
+        font-weight: bolder;
         font-size: 10vw;
         flex: 1 1 auto;
         margin: 0px;
@@ -28,7 +28,7 @@
     
     header h2{
         text-transform: uppercase;
-        font-weight: 740;
+        font-weight: bold;
         flex: 1 1 auto;
         font-size: 4vw;
         margin: 10px ;
@@ -256,7 +256,7 @@
     }
 
     article p{
-        font-weight: 600;
+        font-weight: bold;
     }
     
     article h3{
