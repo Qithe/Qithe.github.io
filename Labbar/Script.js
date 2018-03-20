@@ -31,13 +31,13 @@ function AddData() {
 
     // Gör en AJAX request och visa resultatet
     let ajax = new XMLHttpRequest();
-    ajax.open('get', newUrl);
+    ajax.open('post', newUrl);
     ajax.onreadystatechange = function () {
         if (ajax.status === 200 && ajax.readyState === 4) {
             // AJAX lyckades, presentera svaret
             let json = JSON.parse(ajax.responseText);
-            console.log(json);
-            document.getElementById('OutputMessage').innerHTML += json.status;
+            console.log('AddData ' + json);
+            document.getElementById('OutputMessage').innerHTML += ' ' + json.status;
             //document.getElementById('Booklist').innerHTML = 'Success';
         }
         else if (ajax.status !== 200) {
@@ -58,9 +58,9 @@ function ViewData() {
         if (ajax.status === 200 && ajax.readyState === 4) {
             // AJAX lyckades, presentera svaret
             let json = JSON.parse(ajax.responseText);
-            console.log(json);
-            document.getElementById('OutputMessage').innerHTML += json.title;
-            document.getElementById('OutputMessage').innerHTML += json.author;
+            console.log('ViewData ' + json[0].Object);
+            document.getElementById('BooksAuthors').value = 'HejHej';
+            document.getElementById('OutputMessage').innerHTML += ' ' + json;
             //document.getElementById('Booklist').innerHTML = 'Success';
         }
         else if (ajax.status !== 200) {
