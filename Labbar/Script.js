@@ -2,13 +2,7 @@
 let url = 'https://www.forverkliga.se/JavaScript/api/crud.php';
 let theKey;
 
-function wait(ms) {
-    var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
-}
+
 
 function GetApiKey() {
     let querystring = '?requestKey';
@@ -31,36 +25,51 @@ function GetApiKey() {
     });
 }
 
-function AddData() {
+function AddData(tries, statusMessage) {
     let title = document.getElementById('Title').value;
     let author = document.getElementById('Author').value;
-    var PushSuccessful = false;
-    var tries = 0;
+    
+    //Sets standard values
+    if(tries === undefined){tries = 1;}
+    if(statusMessage === undefined){statusMessage = '';}
     
     if(title!=='' && author!==''){
-        while(!PushSuccessful || tries>=9){
-            var statusMessage = PushToDatabase(title,author); 
-            if (statusMessage == 'success'){
-                PushSuccessful = true;
-            } else {
-                tries++;
-                console.log('Try nr'+tries+1);
-                if(tries>=9){
-                    console.log('Push unsuccsssesful')
-                    document.getElementById('OutputMessage').innerHTML = 'Något gick fel, var god görsök igen';
+        if (tries <= 10 && statusMessage !== 'success')
+        {   //Checks how many times it tried to push, if less than 10, it will try to push
+            console.log('Try nr '+tries+' to push');
+            let callbackAdd = function(statusMessage) {
+                //statusMessage = PushToDatabase(title,author);
+                console.log(statusMessage+' Push tried')
+                if (statusMessage === 'success')
+                {   //if succsessful, clear inputs
+                    console.log('Push was '+statusMessage);
+                    document.getElementById('Title').value='';
+                    document.getElementById('Author').value='';
+                } 
+                else
+                {   //If not succsessful, try again
+                    tries++;
+                    AddData(tries, statusMessage);
                 }
             }
+            PushToDatabase(title, author, callbackAdd);
         }
-        document.getElementById('Title').value='';
-        document.getElementById('Author').value='';
+        else if(tries > 10 && statusMessage !== 'success')
+        {   //if previus try was not sucsessful, and it have tried 10 times, do this
+            console.log('Push was '+statusMessage);
+            document.getElementById('OutputMessage').innerHTML = 'Något gick fel, var god görsök igen';
+        }
     }
-    else{
+    else
+    {   //If one or both inputfield are emty, do this
         document.getElementById('OutputMessage').innerHTML = 'Du måste fylla i både en titel och författare';
         console.log('Författare och/eller titel saknades i sina text fält');
     }
 }
+
+
  
-function PushToDatabase(title, author){
+function PushToDatabase(title, author, callback){
     var statusMessage = '';
     let querystring = '?op=insert&key=' + theKey + '&title='+title+'&author='+author;
     let newUrl = url+querystring;
@@ -72,6 +81,8 @@ function PushToDatabase(title, author){
     .then(function(data){
         console.log(data);
         document.getElementById('OutputMessage').innerHTML += 'AD ' + data.status;
+        callback(data.status);
+        ViewData();
     })
     /*.then(function(data){
         if(data.status === 'Success'){
@@ -97,7 +108,6 @@ function ViewData() {
             console.log(data.data);
             document.getElementById('BooksAuthors').innerHTML = '';
             for(i in data.data){
-                console.log(data.data[i].title);
                 document.getElementById('BooksAuthors').innerHTML += '<option value="book">' + data.data[i].title + ', ' + data.data[i].author;
             }    
         })
