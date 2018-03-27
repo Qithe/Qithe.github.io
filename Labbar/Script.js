@@ -43,6 +43,7 @@ function AddData(tries, statusMessage) {
                 if (statusMessage === 'success')
                 {   //if succsessful, clear inputs
                     console.log('Push was '+statusMessage);
+                    document.getElementById('OutputMessage').innerHTML = '';
                     document.getElementById('Title').value='';
                     document.getElementById('Author').value='';
                 } 
@@ -65,6 +66,7 @@ function AddData(tries, statusMessage) {
         document.getElementById('OutputMessage').innerHTML = 'Du måste fylla i både en titel och författare';
         console.log('Författare och/eller titel saknades i sina text fält');
     }
+    ViewData();
 }
 
 
@@ -82,37 +84,66 @@ function PushToDatabase(title, author, callback){
         console.log(data);
         document.getElementById('OutputMessage').innerHTML += 'AD ' + data.status;
         callback(data.status);
-        ViewData();
+        
     })
-    /*.then(function(data){
-        if(data.status === 'Success'){
-            ViewData();
-        }
-    })*/
     .catch(function(message){
         document.getElementById('OutputMessage').innerHTML = 'Ett okänt fel inträffade vid AJAX request i AddData.';
     })
+    
 }
 
-function ViewData() {
+function ViewData(tries, statusMessage){
+    //Sets default values if none exists
+    if(tries === undefined){tries = 1;}
+    if(statusMessage === undefined){statusMessage = '';}
+    
+    if (tries <= 10 && statusMessage !== 'success')
+    {   //Checks how many times it tried to push, if less than 10, it will try to push
+        console.log('Try nr '+tries+' to pull');
+        let callbackView = function(statusMessage) {
+            //statusMessage = PushToDatabase(title,author);
+            console.log(statusMessage+' Pull tried')
+            if (statusMessage === 'success')
+            {   //if succsessful, clear inputs
+                console.log('Pull was '+statusMessage);
+            } 
+            else
+            {   //If not succsessful, try again
+                tries++;
+                ViewData(tries, statusMessage);
+            }
+        }
+        PullFromDatabase(callbackView);
+    }
+    else if(tries > 10 && statusMessage !== 'success')
+    {   //if previus try was not sucsessful, and it have tried 10 times, do this
+        console.log('Pull was '+statusMessage);
+        document.getElementById('OutputMessage').innerHTML = 'Något gick fel, var god görsök igen';
+    }
+    
+    
+}
+
+function PullFromDatabase(callback) {
     let querystring = '?op=select&key=' + theKey;
     let newUrl = url+querystring;
     let previousContent = document.getElementById('BooksAuthors').innerHTML;
     
-    //do{
-        fetch(newUrl)
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            console.log(data.data);
-            document.getElementById('BooksAuthors').innerHTML = '';
-            for(i in data.data){
-                document.getElementById('BooksAuthors').innerHTML += '<option value="book">' + data.data[i].title + ', ' + data.data[i].author;
-            }    
-        })
-        .catch(function(message){
-            document.getElementById('OutputMessage').innerHTML = 'Ett okänt fel inträffade vid AJAX request i ViewData.';
-        })
-    //}while(document.getElementById('BooksAuthors').innerHTML === previousContent);
+    
+    fetch(newUrl)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data.data);
+        document.getElementById('BooksAuthors').innerHTML = '';
+        callback(data.status);
+        for(i in data.data){
+            document.getElementById('BooksAuthors').innerHTML += '<option value="book">' + data.data[i].title + ', ' + data.data[i].author;
+        }    
+    })
+    .catch(function(message){
+        document.getElementById('OutputMessage').innerHTML = 'Ett okänt fel inträffade vid AJAX request i ViewData.';
+    })
+
 }
